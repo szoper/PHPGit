@@ -25,6 +25,7 @@ class CloneCommand extends Command
      *
      * - **shared** (_boolean_) Starts out without any object of its own
      * - **bare**   (_boolean_) Make a bare GIT repository
+     * - **branch** (_string_)  Specify a branch
      *
      * @param string $repository The repository to clone from
      * @param string $path       [optional] The name of a new directory to clone into
@@ -59,11 +60,13 @@ class CloneCommand extends Command
      *
      * - **shared** (_boolean_) Starts out without any object of its own
      * - **bare**   (_boolean_) Make a bare GIT repository
+     * - **branch** (_string_)  Specify a branch
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefault('shared', false)
-            ->setDefault('bare', false);
+            ->setDefault('bare', false)
+            ->setDefault('branch', 'master');
     }
 }
