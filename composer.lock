@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "802ac277f96c0545e458be8388e1534b",
+    "hash": "c5843031f6e74523b926aaa55e9d5cdb",
     "packages": [
         {
             "name": "symfony/options-resolver",
@@ -170,8 +170,6 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": ">=5.3.2"
-    },
+    "platform": [],
     "platform-dev": []
 }
