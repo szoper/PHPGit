@@ -22,27 +22,8 @@ class DiffCommand extends Command
      * $diff = $git->diff();
      * ```
      *
-     * ##### Output Example
-     *
-     * ``` php
-     * [
-     *     0 => [
-     *         'hash'  => '1a821f3f8483747fd045eb1f5a31c3cc3063b02b',
-     *         'name'  => 'John Doe',
-     *         'email' => 'john@example.com',
-     *         'date'  => 'Fri Jan 17 16:32:49 2014 +0900',
-     *         'title' => 'Initial Commit'
-     *     ],
-     *     1 => [
-     *         //...
-     *     ]
-     * ]
-     * ```
      *
      * ##### Options
-     *
-     * - **limit** (_integer_) Limits the number of commits to show
-     * - **skip**  (_integer_) Skip number commits before starting to show the commit output
      *
      * @param string $revRange [optional] Show only commits in the specified revision range
      * @param string $path     [optional] Show only commits that are enough to explain how the files that match the specified paths came to be
@@ -50,12 +31,14 @@ class DiffCommand extends Command
      *
      * @throws GitException
      *
-     * @return array
+     * @return mixed
      */
     public function __invoke($revRange = '', $path = null, array $options = array())
     {
         $builder = $this->git->getProcessBuilder()
-            ->add('diff');
+            ->add('diff')
+            ->add('--color')
+        ;
 
         if ($revRange) {
             $builder->add($revRange);
@@ -64,6 +47,8 @@ class DiffCommand extends Command
         if ($path) {
             $builder->add('--')->add($path);
         }
+
+        echo $builder->getProcess()->getCommandLine();
 
         $output = $this->git->run($builder->getProcess());
 
