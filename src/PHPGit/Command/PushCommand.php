@@ -53,11 +53,10 @@ class PushCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'all' => false,
-            'mirror' => false,
-            'tags' => false,
-            'force' => false,
-        ));
+        $resolver
+            ->setDefault('all', false)
+            ->setDefault('mirror', false)
+            ->setDefault('tags', false)
+            ->setDefault('force', false);
     }
 }

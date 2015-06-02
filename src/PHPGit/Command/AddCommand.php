@@ -64,11 +64,8 @@ class AddCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            //'dry-run'        => false,
-            'force' => false,
-            'ignore-errors' => false,
-            //'ignore-missing' => false,
-        ));
+        $resolver
+            ->setDefault('force', false)
+            ->setDefault('ignore-errors', false);
     }
 }

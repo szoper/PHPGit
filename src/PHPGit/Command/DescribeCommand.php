@@ -79,10 +79,9 @@ class DescribeCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'all' => false,
-            'tags' => false,
-            'always' => false,
-        ));
+        $resolver
+            ->setDefault('all', false)
+            ->setDefault('tags', false)
+            ->setDefault('always', false);
     }
 }

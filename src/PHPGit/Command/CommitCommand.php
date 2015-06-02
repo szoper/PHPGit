@@ -69,18 +69,15 @@ class CommitCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'all' => false,
-            'reuse-message' => null,
-            'squash' => null,
-            'author' => null,
-            'date' => null,
-            'cleanup' => null,
-            'amend' => false,
-        ));
+        $resolver
+            ->setDefault('all', false)
+            ->setDefault('reuse-message', null)
+            ->setDefault('squash', null)
+            ->setDefault('author', null)
+            ->setDefault('date', null)
+            ->setDefault('cleanup', null)
+            ->setDefault('amend', false)
 
-        $resolver->setAllowedValues(array(
-            'cleanup' => array(null, 'default', 'verbatim', 'whitespace', 'strip'),
-        ));
+            ->setAllowedValues('cleanup', array(null, 'default', 'verbatim', 'whitespace', 'strip'));
     }
 }

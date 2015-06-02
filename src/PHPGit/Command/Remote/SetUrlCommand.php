@@ -166,8 +166,6 @@ class SetUrlCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'push' => false,
-        ));
+        $resolver->setDefault('push', false);
     }
 }

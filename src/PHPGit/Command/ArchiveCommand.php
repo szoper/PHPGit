@@ -77,18 +77,13 @@ class ArchiveCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'format' => null,
-            'prefix' => null,
-        ));
+        $resolver
+            ->setDefault('format', null)
+            ->setDefault('prefix', null)
 
-        $resolver->setAllowedTypes(array(
-            'format' => array('null', 'string'),
-            'prefix' => array('null', 'string'),
-        ));
+            ->setAllowedTypes('format', array('null', 'string'))
+            ->setAllowedTypes('prefix', array('null', 'string'))
 
-        $resolver->setAllowedValues(array(
-            'format' => array('tar', 'zip'),
-        ));
+            ->setAllowedValues('format', array('tar', 'zip'));
     }
 }

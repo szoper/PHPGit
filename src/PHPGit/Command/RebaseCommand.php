@@ -114,14 +114,11 @@ class RebaseCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'onto' => null,
-            'no-verify' => false,
-            'force-rebase' => false,
-        ));
+        $resolver
+            ->setDefault('onto', null)
+            ->setDefault('no-verify', false)
+            ->setDefault('force-rebase', false)
 
-        $resolver->setAllowedTypes(array(
-            'onto' => array('null', 'string'),
-        ));
+            ->setAllowedTypes('onto', array('null', 'string'));
     }
 }

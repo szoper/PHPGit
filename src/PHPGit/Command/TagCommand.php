@@ -149,10 +149,9 @@ class TagCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'annotate' => false,
-            'sign' => false,
-            'force' => false,
-        ));
+        $resolver
+            ->setDefault('annotate', false)
+            ->setDefault('sign', false)
+            ->setDefault('force', false);
     }
 }

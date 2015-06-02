@@ -86,10 +86,9 @@ class RmCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'force' => false,
-            'cached' => false,
-            'recursive' => false,
-        ));
+        $resolver
+            ->setDefault('force', false)
+            ->setDefault('cached', false)
+            ->setDefault('recursive', false);
     }
 }

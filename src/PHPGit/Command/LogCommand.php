@@ -96,9 +96,8 @@ class LogCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'limit' => 10,
-            'skip' => 0,
-        ));
+        $resolver
+            ->setDefault('limit', 10)
+            ->setDefault('skip', 0);
     }
 }

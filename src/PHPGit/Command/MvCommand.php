@@ -61,8 +61,6 @@ class MvCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'force' => false,
-        ));
+        $resolver->setDefault('force', false);
     }
 }

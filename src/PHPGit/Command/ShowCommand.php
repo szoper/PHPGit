@@ -56,13 +56,9 @@ class ShowCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'format' => null,
-            'abbrev-commit' => false,
-        ));
-
-        $resolver->setAllowedTypes(array(
-            'format' => array('null', 'string'),
-        ));
+        $resolver
+            ->setDefault('format', null)
+            ->setDefault('abbrev-commit', false)
+            ->setAllowedTypes('format', array('null', 'string'));
     }
 }

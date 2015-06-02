@@ -138,8 +138,6 @@ class StatusCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'ignored' => false,
-        ));
+        $resolver->setDefault('ignored', false);
     }
 }

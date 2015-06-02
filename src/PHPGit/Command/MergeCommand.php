@@ -98,13 +98,11 @@ class MergeCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'no-ff' => false,
-            'rerere-autoupdate' => false,
-            'squash' => false,
-
-            'strategy' => null,
-            'strategy-option' => null,
-        ));
+        $resolver
+            ->setDefault('no-ff', false)
+            ->setDefault('rerere-autoupdate', false)
+            ->setDefault('squash', false)
+            ->setDefault('strategy', null)
+            ->setDefault('strategy-option', null);
     }
 }

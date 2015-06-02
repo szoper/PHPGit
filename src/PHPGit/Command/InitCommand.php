@@ -56,9 +56,8 @@ class InitCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'shared' => false,
-            'bare' => false,
-        ));
+        $resolver
+            ->setDefault('shared', false)
+            ->setDefault('bare', true);
     }
 }

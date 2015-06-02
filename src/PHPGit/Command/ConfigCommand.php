@@ -125,9 +125,8 @@ class ConfigCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'global' => false,
-            'system' => false,
-        ));
+        $resolver
+            ->setDefault('global', false)
+            ->setDefault('system', false);
     }
 }

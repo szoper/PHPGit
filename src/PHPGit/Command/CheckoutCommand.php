@@ -138,9 +138,8 @@ class CheckoutCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'force' => false,
-            'merge' => false,
-        ));
+        $resolver
+            ->setDefault('force', false)
+            ->setDefault('merge', false);
     }
 }

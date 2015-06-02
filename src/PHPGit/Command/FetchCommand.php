@@ -102,11 +102,9 @@ class FetchCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'append' => false,
-            //'force'  => false,
-            'keep' => false,
-            'prune' => false,
-        ));
+        $resolver
+            ->setDefault('append', false)
+            ->setDefault('keep', false)
+            ->setDefault('prune', false);
     }
 }

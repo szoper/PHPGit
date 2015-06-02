@@ -213,11 +213,10 @@ class BranchCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'force' => false,
-            'all' => false,
-            'remotes' => false,
-        ));
+        $resolver
+            ->setDefault('force', false)
+            ->setDefault('all', false)
+            ->setDefault('remotes', false);
     }
 
     /**

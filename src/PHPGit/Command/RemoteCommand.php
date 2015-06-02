@@ -269,9 +269,8 @@ class RemoteCommand extends Command
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'tags' => false,
-            'no-tags' => false,
-        ));
+        $resolver
+            ->setDefault('tags', false)
+            ->setDefault('no-tags', false);
     }
 }
