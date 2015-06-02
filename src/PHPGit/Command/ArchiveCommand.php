@@ -84,6 +84,6 @@ class ArchiveCommand extends Command
             ->setAllowedTypes('format', array('null', 'string'))
             ->setAllowedTypes('prefix', array('null', 'string'))
 
-            ->setAllowedValues('format', array('tar', 'zip'));
+            ->setAllowedValues('format', array('tar', 'zip', 'tar.gz', 'tgz'));
     }
 }
