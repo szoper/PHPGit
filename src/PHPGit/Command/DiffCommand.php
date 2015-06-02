@@ -14,12 +14,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class DiffCommand extends Command
 {
     /**
-     * Returns the commit logs.
+     * Returns diffs.
      *
      * ``` php
      * $git = new PHPGit\Git();
      * $git->setRepository('/path/to/repo');
-     * $logs = $git->log(array('limit' => 10));
+     * $diff = $git->diff();
      * ```
      *
      * ##### Output Example

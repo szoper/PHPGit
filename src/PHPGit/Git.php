@@ -72,6 +72,7 @@ use Symfony\Component\Process\ProcessBuilder;
  * @method commit($message = '', $options = array())                Record changes to the repository
  * @method config($options = array())                               List all variables set in config file
  * @method describe($committish = null, $options = array())         Returns the most recent tag that is reachable from a commit
+ * @method diff($revRange = '', $path = null, $options = array())   Returns diffs of specific commits
  * @method fetch($repository, $refspec = null, $options = array())  Fetches named heads or tags from one or more other repositories
  * @method init($path, $options = array())                          Create an empty git repository or reinitialize an existing one
  * @method log($path = null, $options = array())                    Returns the commit logs
