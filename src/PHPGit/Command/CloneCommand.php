@@ -42,6 +42,11 @@ class CloneCommand extends Command
             ->add('clone')
             ->add('--quiet');
 
+        if ($options['branch']) {
+            $builder->add('--branch='.$options['branch']);
+            unset($options['branch']);
+        }
+
         $this->addFlags($builder, $options);
 
         $builder->add($repository);
@@ -67,6 +72,8 @@ class CloneCommand extends Command
         $resolver
             ->setDefault('shared', false)
             ->setDefault('bare', false)
-            ->setDefault('branch', 'master');
+            ->setDefault('branch', null)
+
+            ->setAllowedTypes('branch', array('null', 'string'));
     }
 }
