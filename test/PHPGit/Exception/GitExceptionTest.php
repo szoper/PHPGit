@@ -5,7 +5,6 @@ use PHPGit\Git;
 
 class GitExceptionTest extends PHPUnit_Framework_TestCase
 {
-
     public function testException()
     {
         $git = new Git();
@@ -19,5 +18,4 @@ class GitExceptionTest extends PHPUnit_Framework_TestCase
             $this->assertStringEndsWith('status --porcelain -s -b --null', $command);
         }
     }
-
-} 
+}

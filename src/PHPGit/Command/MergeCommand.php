@@ -4,18 +4,17 @@ namespace PHPGit\Command;
 
 use PHPGit\Command;
 use PHPGit\Exception\GitException;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Join two or more development histories together - `git merge`
+ * Join two or more development histories together - `git merge`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class MergeCommand extends Command
 {
-
     /**
-     * Incorporates changes from the named commits into the current branch
+     * Incorporates changes from the named commits into the current branch.
      *
      * ```php
      * $git = new PHPGit\Git();
@@ -37,6 +36,7 @@ class MergeCommand extends Command
      * @param array                     $options [optional] An array of options {@see MergeCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function __invoke($commit, $message = null, array $options = array())
@@ -60,7 +60,7 @@ class MergeCommand extends Command
     }
 
     /**
-     * Abort the merge process and try to reconstruct the pre-merge state
+     * Abort the merge process and try to reconstruct the pre-merge state.
      *
      * ```php
      * $git = new PHPGit\Git();
@@ -73,6 +73,7 @@ class MergeCommand extends Command
      * ```
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function abort()
@@ -95,16 +96,15 @@ class MergeCommand extends Command
      * - **strategy**            (_string_)  Use the given merge strategy
      * - **strategy-option**     (_string_)  Pass merge strategy specific option through to the merge strategy
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'no-ff'             => false,
+            'no-ff' => false,
             'rerere-autoupdate' => false,
-            'squash'            => false,
+            'squash' => false,
 
-            'strategy'          => null,
-            'strategy-option'   => null
+            'strategy' => null,
+            'strategy-option' => null,
         ));
     }
-
-} 
+}

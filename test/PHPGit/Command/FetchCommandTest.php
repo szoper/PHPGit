@@ -2,11 +2,10 @@
 
 use PHPGit\Git;
 
-require_once __DIR__ . '/../BaseTestCase.php';
+require_once __DIR__.'/../BaseTestCase.php';
 
 class FetchCommandTest extends BaseTestCase
 {
-
     public function testFetch()
     {
         $git = new Git();
@@ -32,5 +31,4 @@ class FetchCommandTest extends BaseTestCase
         $tags = $git->tag();
         $this->assertContains('v1.0.0', $tags);
     }
-
-} 
+}

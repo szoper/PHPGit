@@ -3,11 +3,10 @@
 use PHPGit\Git;
 use Symfony\Component\Filesystem\Filesystem;
 
-require_once __DIR__ . '/../BaseTestCase.php';
+require_once __DIR__.'/../BaseTestCase.php';
 
 class PushCommandTest extends BaseTestCase
 {
-
     public function testPush()
     {
         $filesystem = new Filesystem();
@@ -15,7 +14,7 @@ class PushCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory, array('shared' => true, 'bare' => true));
 
-        $git->clone('file://' . realpath($this->directory), $this->directory.'2');
+        $git->clone('file://'.realpath($this->directory), $this->directory.'2');
         $git->setRepository($this->directory.'2');
 
         $filesystem->dumpFile($this->directory.'2/test.txt', 'foobar');
@@ -23,12 +22,11 @@ class PushCommandTest extends BaseTestCase
         $git->commit('test');
         $git->push('origin', 'master');
 
-        $git->clone('file://' . realpath($this->directory), $this->directory.'3');
+        $git->clone('file://'.realpath($this->directory), $this->directory.'3');
 
         $this->assertFileExists($this->directory.'3/test.txt');
 
         $filesystem->remove($this->directory.'2');
         $filesystem->remove($this->directory.'3');
     }
-
-} 
+}

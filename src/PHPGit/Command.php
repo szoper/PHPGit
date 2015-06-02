@@ -3,17 +3,15 @@
 namespace PHPGit;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
- * Base class for git commands
+ * Base class for git commands.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 abstract class Command
 {
-
     /**
      * @var Git
      */
@@ -28,7 +26,7 @@ abstract class Command
     }
 
     /**
-     * Returns the combination of the default and the passed options
+     * Returns the combination of the default and the passed options.
      *
      * @param array $options An array of options
      *
@@ -43,18 +41,18 @@ abstract class Command
     }
 
     /**
-     * Sets the default options
+     * Sets the default options.
      *
-     * @param OptionsResolverInterface $resolver The resolver for the options
+     * @param OptionsResolver $resolver The resolver for the options
      *
      * @codeCoverageIgnore
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
     }
 
     /**
-     * Split string by new line or null(\0)
+     * Split string by new line or null(\0).
      *
      * @param string $input   The string to split
      * @param bool   $useNull True to split by new line, otherwise null
@@ -73,7 +71,7 @@ abstract class Command
     }
 
     /**
-     * Adds boolean options to command arguments
+     * Adds boolean options to command arguments.
      *
      * @param ProcessBuilder $builder     A ProcessBuilder object
      * @param array          $options     An array of options
@@ -84,20 +82,20 @@ abstract class Command
         if ($optionNames) {
             foreach ($optionNames as $name) {
                 if (isset($options[$name]) && is_bool($options[$name]) && $options[$name]) {
-                    $builder->add('--' . $name);
+                    $builder->add('--'.$name);
                 }
             }
         } else {
             foreach ($options as $name => $option) {
                 if ($option) {
-                    $builder->add('--' . $name);
+                    $builder->add('--'.$name);
                 }
             }
         }
     }
 
     /**
-     * Adds options with values to command arguments
+     * Adds options with values to command arguments.
      *
      * @param ProcessBuilder $builder     A ProcessBuilder object
      * @param array          $options     An array of options
@@ -108,16 +106,15 @@ abstract class Command
         if ($optionNames) {
             foreach ($optionNames as $name) {
                 if (isset($options[$name]) && $options[$name]) {
-                    $builder->add('--' . $name . '=' . $options[$name]);
+                    $builder->add('--'.$name.'='.$options[$name]);
                 }
             }
         } else {
             foreach ($options as $name => $option) {
                 if ($option) {
-                    $builder->add('--' . $name . '=' . $option);
+                    $builder->add('--'.$name.'='.$option);
                 }
             }
         }
     }
-
-} 
+}

@@ -7,7 +7,6 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 abstract class BaseTestCase extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @var string
      */
@@ -18,7 +17,7 @@ abstract class BaseTestCase extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->directory = __DIR__.'/../../build/' . strtolower(get_class($this));
+        $this->directory = __DIR__.'/../../build/'.strtolower(get_class($this));
     }
 
     /**
@@ -29,5 +28,4 @@ abstract class BaseTestCase extends PHPUnit_Framework_TestCase
         $filesystem = new Filesystem();
         $filesystem->remove($this->directory);
     }
-
-} 
+}

@@ -2,11 +2,10 @@
 
 use PHPGit\Git;
 
-require_once __DIR__ . '/../../BaseTestCase.php';
+require_once __DIR__.'/../../BaseTestCase.php';
 
 class SetHeadCommandTest extends BaseTestCase
 {
-
     public function testSetHead()
     {
         $git = new Git();
@@ -52,5 +51,4 @@ class SetHeadCommandTest extends BaseTestCase
 
         $this->assertEquals($before, $after);
     }
-
-} 
+}

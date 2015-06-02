@@ -4,10 +4,10 @@ namespace PHPGit\Command;
 
 use PHPGit\Command;
 use PHPGit\Git;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Manage set of tracked repositories - `git remote`
+ * Manage set of tracked repositories - `git remote`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  *
@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RemoteCommand extends Command
 {
-
     /** @var Remote\SetHeadCommand */
     public $head;
 
@@ -34,18 +33,19 @@ class RemoteCommand extends Command
     {
         parent::__construct($git);
 
-        $this->head     = new Remote\SetHeadCommand($git);
+        $this->head = new Remote\SetHeadCommand($git);
         $this->branches = new Remote\SetBranchesCommand($git);
-        $this->url      = new Remote\SetUrlCommand($git);
+        $this->url = new Remote\SetUrlCommand($git);
     }
 
     /**
-     * Calls sub-commands
+     * Calls sub-commands.
      *
      * @param string $name      The name of a property
      * @param array  $arguments An array of arguments
      *
      * @throws \BadMethodCallException
+     *
      * @return mixed
      */
     public function __call($name, $arguments)
@@ -58,7 +58,7 @@ class RemoteCommand extends Command
     }
 
     /**
-     * Returns an array of existing remotes
+     * Returns an array of existing remotes.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -87,8 +87,8 @@ class RemoteCommand extends Command
             ->add('-v');
 
         $remotes = array();
-        $output  = $this->git->run($builder->getProcess());
-        $lines   = $this->split($output);
+        $output = $this->git->run($builder->getProcess());
+        $lines = $this->split($output);
 
         foreach ($lines as $line) {
             if (preg_match('/^(.*)\t(.*)\s\((.*)\)$/', $line, $matches)) {
@@ -104,7 +104,7 @@ class RemoteCommand extends Command
     }
 
     /**
-     * Adds a remote named **$name** for the repository at **$url**
+     * Adds a remote named **$name** for the repository at **$url**.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -141,7 +141,7 @@ class RemoteCommand extends Command
     }
 
     /**
-     * Rename the remote named **$name** to **$newName**
+     * Rename the remote named **$name** to **$newName**.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -169,7 +169,7 @@ class RemoteCommand extends Command
     }
 
     /**
-     * Remove the remote named **$name**
+     * Remove the remote named **$name**.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -195,7 +195,7 @@ class RemoteCommand extends Command
     }
 
     /**
-     * Gives some information about the remote **$name**
+     * Gives some information about the remote **$name**.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -234,7 +234,7 @@ class RemoteCommand extends Command
     }
 
     /**
-     * Deletes all stale remote-tracking branches under **$name**
+     * Deletes all stale remote-tracking branches under **$name**.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -267,12 +267,11 @@ class RemoteCommand extends Command
      * - **tags**    (_boolean_) With this option, `git fetch <name>` imports every tag from the remote repository
      * - **no-tags** (_boolean_) With this option, `git fetch <name>` does not import tags from the remote repository
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'tags'    => false,
-            'no-tags' => false
+            'tags' => false,
+            'no-tags' => false,
         ));
     }
-
 }

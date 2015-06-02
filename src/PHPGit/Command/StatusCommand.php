@@ -3,10 +3,10 @@
 namespace PHPGit\Command;
 
 use PHPGit\Command;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Show the working tree status - `git status`
+ * Show the working tree status - `git status`.
  *
  *   = unmodified
  * M = modified
@@ -44,19 +44,18 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class StatusCommand extends Command
 {
-
-    const UNMODIFIED           = ' ';
-    const MODIFIED             = 'M';
-    const ADDED                = 'A';
-    const DELETED              = 'D';
-    const RENAMED              = 'R';
-    const COPIED               = 'C';
+    const UNMODIFIED = ' ';
+    const MODIFIED = 'M';
+    const ADDED = 'A';
+    const DELETED = 'D';
+    const RENAMED = 'R';
+    const COPIED = 'C';
     const UPDATED_BUT_UNMERGED = 'U';
-    const UNTRACKED            = '?';
-    const IGNORED              = '!';
+    const UNTRACKED = '?';
+    const IGNORED = '!';
 
     /**
-     * Returns the working tree status
+     * Returns the working tree status.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -107,8 +106,8 @@ class StatusCommand extends Command
         $this->addFlags($builder, $options);
 
         $process = $builder->getProcess();
-        $result  = array('branch' => null, 'changes' => array());
-        $output  = $this->git->run($process);
+        $result = array('branch' => null, 'changes' => array());
+        $output = $this->git->run($process);
 
         list($branch, $changes) = preg_split('/(\0|\n)/', $output, 2);
         $lines = $this->split($changes, true);
@@ -123,9 +122,9 @@ class StatusCommand extends Command
 
         foreach ($lines as $line) {
             $result['changes'][] = array(
-                'file'      => substr($line, 3),
-                'index'     => substr($line, 0, 1),
-                'work_tree' => substr($line, 1, 1)
+                'file' => substr($line, 3),
+                'index' => substr($line, 0, 1),
+                'work_tree' => substr($line, 1, 1),
             );
         }
 
@@ -137,11 +136,10 @@ class StatusCommand extends Command
      *
      * - **ignored** (_boolean_) Show ignored files as well
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'ignored' => false
+            'ignored' => false,
         ));
     }
-
 }

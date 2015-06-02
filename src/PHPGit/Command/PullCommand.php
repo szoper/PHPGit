@@ -3,18 +3,17 @@
 namespace PHPGit\Command;
 
 use PHPGit\Command;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Fetch from and merge with another repository or a local branch - `git pull`
+ * Fetch from and merge with another repository or a local branch - `git pull`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class PullCommand extends Command
 {
-
     /**
-     * Fetch from and merge with another repository or a local branch
+     * Fetch from and merge with another repository or a local branch.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -22,10 +21,10 @@ class PullCommand extends Command
      * $git->pull('origin', 'master');
      * ```
      *
-     * @param string $repository  The "remote" repository that is the source of a fetch or pull operation
-     * @param string $refspec     The format of a <refspec> parameter is an optional plus +,
-     *                            followed by the source ref <src>, followed by a colon :, followed by the destination ref <dst>
-     * @param array  $options     [optional] An array of options {@see PullCommand::setDefaultOptions}
+     * @param string $repository The "remote" repository that is the source of a fetch or pull operation
+     * @param string $refspec    The format of a <refspec> parameter is an optional plus +,
+     *                           followed by the source ref <src>, followed by a colon :, followed by the destination ref <dst>
+     * @param array  $options    [optional] An array of options {@see PullCommand::setDefaultOptions}
      *
      * @return bool
      */
@@ -51,9 +50,7 @@ class PullCommand extends Command
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
-
     }
-
 }

@@ -2,11 +2,10 @@
 
 use PHPGit\Git;
 
-require_once __DIR__ . '/../../BaseTestCase.php';
+require_once __DIR__.'/../../BaseTestCase.php';
 
 class SetBranchesCommandTest extends BaseTestCase
 {
-
     public function testSetBranches()
     {
         $git = new Git();
@@ -24,5 +23,4 @@ class SetBranchesCommandTest extends BaseTestCase
 
         $git->remote->branches->add('origin', array('gh-pages'));
     }
-
-} 
+}

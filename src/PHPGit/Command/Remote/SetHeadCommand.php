@@ -5,15 +5,14 @@ namespace PHPGit\Command\Remote;
 use PHPGit\Command;
 
 /**
- * Sets or deletes the default branch (i.e. the target of the symbolic-ref refs/remotes/<name>/HEAD) for the named remote
+ * Sets or deletes the default branch (i.e. the target of the symbolic-ref refs/remotes/<name>/HEAD) for the named remote.
  *
  * @author Kazuyuki Hayashi
  */
 class SetHeadCommand extends Command
 {
-
     /**
-     * Alias of set()
+     * Alias of set().
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -33,7 +32,7 @@ class SetHeadCommand extends Command
     }
 
     /**
-     * Sets the default branch for the named remote
+     * Sets the default branch for the named remote.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -64,7 +63,7 @@ class SetHeadCommand extends Command
     }
 
     /**
-     * Deletes the default branch for the named remote
+     * Deletes the default branch for the named remote.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -91,7 +90,7 @@ class SetHeadCommand extends Command
     }
 
     /**
-     * Determine the default branch by querying remote
+     * Determine the default branch by querying remote.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -116,5 +115,4 @@ class SetHeadCommand extends Command
 
         return true;
     }
-
-} 
+}

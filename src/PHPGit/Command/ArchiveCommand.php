@@ -4,18 +4,17 @@ namespace PHPGit\Command;
 
 use PHPGit\Command;
 use PHPGit\Exception\GitException;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Create an archive of files from a named tree - `git archive`
+ * Create an archive of files from a named tree - `git archive`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class ArchiveCommand extends Command
 {
-
     /**
-     * Create an archive of files from a named tree
+     * Create an archive of files from a named tree.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -34,6 +33,7 @@ class ArchiveCommand extends Command
      * @param array                     $options [optional] An array of options {@see ArchiveCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function __invoke($file, $tree = null, $path = null, array $options = array())
@@ -43,11 +43,11 @@ class ArchiveCommand extends Command
             ->add('archive');
 
         if ($options['format']) {
-            $builder->add('--format=' . $options['format']);
+            $builder->add('--format='.$options['format']);
         }
 
         if ($options['prefix']) {
-            $builder->add('--prefix=' . $options['prefix']);
+            $builder->add('--prefix='.$options['prefix']);
         }
 
         $builder->add('-o')->add($file);
@@ -75,22 +75,20 @@ class ArchiveCommand extends Command
      * - **format** (_boolean_) Format of the resulting archive: tar or zip
      * - **prefix** (_boolean_) Prepend prefix/ to each filename in the archive
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'format' => null,
-            'prefix' => null
+            'prefix' => null,
         ));
 
         $resolver->setAllowedTypes(array(
             'format' => array('null', 'string'),
-            'prefix' => array('null', 'string')
+            'prefix' => array('null', 'string'),
         ));
 
         $resolver->setAllowedValues(array(
-            'format' => array('tar', 'zip')
+            'format' => array('tar', 'zip'),
         ));
     }
-
-
-} 
+}

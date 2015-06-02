@@ -4,7 +4,6 @@ use PHPGit\Git;
 
 class GitTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetVersion()
     {
         $git = new Git();
@@ -29,5 +28,4 @@ class GitTest extends PHPUnit_Framework_TestCase
         $git = new Git();
         $git->foo();
     }
-
-} 
+}

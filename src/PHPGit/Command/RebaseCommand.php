@@ -3,18 +3,17 @@
 namespace PHPGit\Command;
 
 use PHPGit\Command;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Forward-port local commits to the updated upstream head - `git rebase`
+ * Forward-port local commits to the updated upstream head - `git rebase`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class RebaseCommand extends Command
 {
-
     /**
-     * Forward-port local commits to the updated upstream head
+     * Forward-port local commits to the updated upstream head.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -59,7 +58,7 @@ class RebaseCommand extends Command
     }
 
     /**
-     * Restart the rebasing process after having resolved a merge conflict
+     * Restart the rebasing process after having resolved a merge conflict.
      *
      * @return bool
      */
@@ -75,7 +74,7 @@ class RebaseCommand extends Command
     }
 
     /**
-     * Abort the rebase operation and reset HEAD to the original branch
+     * Abort the rebase operation and reset HEAD to the original branch.
      *
      * @return bool
      */
@@ -91,7 +90,7 @@ class RebaseCommand extends Command
     }
 
     /**
-     * Restart the rebasing process by skipping the current patch
+     * Restart the rebasing process by skipping the current patch.
      *
      * @return bool
      */
@@ -113,17 +112,16 @@ class RebaseCommand extends Command
      * - **no-verify**     (_boolean_) Bypasses the pre-rebase hook
      * - **force-rebase**  (_boolean_) Force the rebase even if the current branch is a descendant of the commit you are rebasing onto
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'onto'         => null,
-            'no-verify'    => false,
-            'force-rebase' => false
+            'onto' => null,
+            'no-verify' => false,
+            'force-rebase' => false,
         ));
 
         $resolver->setAllowedTypes(array(
-            'onto' => array('null', 'string')
+            'onto' => array('null', 'string'),
         ));
     }
-
-} 
+}

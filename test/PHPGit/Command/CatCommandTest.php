@@ -3,11 +3,10 @@
 use PHPGit\Git;
 use Symfony\Component\Filesystem\Filesystem;
 
-require_once __DIR__ . '/../BaseTestCase.php';
+require_once __DIR__.'/../BaseTestCase.php';
 
 class CatCommandTest extends BaseTestCase
 {
-
     public function testCatBlob()
     {
         $filesystem = new Filesystem();
@@ -17,7 +16,7 @@ class CatCommandTest extends BaseTestCase
         $git->init($this->directory);
         $git->setRepository($this->directory);
 
-        $filesystem->dumpFile($this->directory . '/test.txt', 'foo');
+        $filesystem->dumpFile($this->directory.'/test.txt', 'foo');
         $git->add('test.txt');
         $git->commit('Initial commit');
 
@@ -35,7 +34,7 @@ class CatCommandTest extends BaseTestCase
         $git->init($this->directory);
         $git->setRepository($this->directory);
 
-        $filesystem->dumpFile($this->directory . '/test.txt', 'foo');
+        $filesystem->dumpFile($this->directory.'/test.txt', 'foo');
         $git->add('test.txt');
         $git->commit('Initial commit');
 
@@ -53,7 +52,7 @@ class CatCommandTest extends BaseTestCase
         $git->init($this->directory);
         $git->setRepository($this->directory);
 
-        $filesystem->dumpFile($this->directory . '/test.txt', 'foo');
+        $filesystem->dumpFile($this->directory.'/test.txt', 'foo');
         $git->add('test.txt');
         $git->commit('Initial commit');
 
@@ -61,5 +60,4 @@ class CatCommandTest extends BaseTestCase
 
         $this->assertEquals(3, $git->cat->size($tree[0]['hash']));
     }
-
-} 
+}

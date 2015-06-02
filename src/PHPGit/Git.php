@@ -2,14 +2,13 @@
 
 namespace PHPGit;
 
-use PHPGit\Command;
 use PHPGit\Exception\GitException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * PHPGit - A Git wrapper for PHP5.3+
- * ==================================
+ * ==================================.
  *
  * [![Latest Unstable Version](https://poser.pugx.org/kzykhys/git/v/unstable.png)](https://packagist.org/packages/kzykhys/git)
  * [![Build Status](https://travis-ci.org/kzykhys/PHPGit.png?branch=master)](https://travis-ci.org/kzykhys/PHPGit)
@@ -93,7 +92,6 @@ use Symfony\Component\Process\ProcessBuilder;
  */
 class Git
 {
-
     /** @var Command\AddCommand */
     public $add;
 
@@ -182,45 +180,46 @@ class Git
     private $directory = '.';
 
     /**
-     * Initializes sub-commands
+     * Initializes sub-commands.
      */
     public function __construct()
     {
-        $this->add      = new Command\AddCommand($this);
-        $this->archive  = new Command\ArchiveCommand($this);
-        $this->branch   = new Command\BranchCommand($this);
-        $this->cat      = new Command\CatCommand($this);
+        $this->add = new Command\AddCommand($this);
+        $this->archive = new Command\ArchiveCommand($this);
+        $this->branch = new Command\BranchCommand($this);
+        $this->cat = new Command\CatCommand($this);
         $this->checkout = new Command\CheckoutCommand($this);
-        $this->clone    = new Command\CloneCommand($this);
-        $this->commit   = new Command\CommitCommand($this);
-        $this->config   = new Command\ConfigCommand($this);
+        $this->clone = new Command\CloneCommand($this);
+        $this->commit = new Command\CommitCommand($this);
+        $this->config = new Command\ConfigCommand($this);
         $this->describe = new Command\DescribeCommand($this);
-        $this->fetch    = new Command\FetchCommand($this);
-        $this->init     = new Command\InitCommand($this);
-        $this->log      = new Command\LogCommand($this);
-        $this->merge    = new Command\MergeCommand($this);
-        $this->mv       = new Command\MvCommand($this);
-        $this->pull     = new Command\PullCommand($this);
-        $this->push     = new Command\PushCommand($this);
-        $this->rebase   = new Command\RebaseCommand($this);
-        $this->remote   = new Command\RemoteCommand($this);
-        $this->reset    = new Command\ResetCommand($this);
-        $this->rm       = new Command\RmCommand($this);
+        $this->fetch = new Command\FetchCommand($this);
+        $this->init = new Command\InitCommand($this);
+        $this->log = new Command\LogCommand($this);
+        $this->merge = new Command\MergeCommand($this);
+        $this->mv = new Command\MvCommand($this);
+        $this->pull = new Command\PullCommand($this);
+        $this->push = new Command\PushCommand($this);
+        $this->rebase = new Command\RebaseCommand($this);
+        $this->remote = new Command\RemoteCommand($this);
+        $this->reset = new Command\ResetCommand($this);
+        $this->rm = new Command\RmCommand($this);
         $this->shortlog = new Command\ShortlogCommand($this);
-        $this->show     = new Command\ShowCommand($this);
-        $this->stash    = new Command\StashCommand($this);
-        $this->status   = new Command\StatusCommand($this);
-        $this->tag      = new Command\TagCommand($this);
-        $this->tree     = new Command\TreeCommand($this);
+        $this->show = new Command\ShowCommand($this);
+        $this->stash = new Command\StashCommand($this);
+        $this->status = new Command\StatusCommand($this);
+        $this->tag = new Command\TagCommand($this);
+        $this->tree = new Command\TreeCommand($this);
     }
 
     /**
-     * Calls sub-commands
+     * Calls sub-commands.
      *
      * @param string $name      The name of a property
      * @param array  $arguments An array of arguments
      *
      * @throws \BadMethodCallException
+     *
      * @return mixed
      */
     public function __call($name, $arguments)
@@ -233,7 +232,7 @@ class Git
     }
 
     /**
-     * Sets the Git binary path
+     * Sets the Git binary path.
      *
      * @param string $bin
      *
@@ -247,9 +246,9 @@ class Git
     }
 
     /**
-     * Sets the Git repository path
+     * Sets the Git repository path.
      *
-     * @var string $directory
+     * @var string
      *
      * @return Git
      */
@@ -261,7 +260,7 @@ class Git
     }
 
     /**
-     * Returns version number
+     * Returns version number.
      *
      * @return mixed
      */
@@ -275,7 +274,7 @@ class Git
     }
 
     /**
-     * Returns an instance of ProcessBuilder
+     * Returns an instance of ProcessBuilder.
      *
      * @return ProcessBuilder
      */
@@ -287,11 +286,12 @@ class Git
     }
 
     /**
-     * Executes a process
+     * Executes a process.
      *
      * @param Process $process The process to run
      *
      * @throws Exception\GitException
+     *
      * @return mixed
      */
     public function run(Process $process)
@@ -304,5 +304,4 @@ class Git
 
         return $process->getOutput();
     }
-
-} 
+}

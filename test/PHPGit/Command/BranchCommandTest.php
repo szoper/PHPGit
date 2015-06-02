@@ -3,11 +3,10 @@
 use PHPGit\Git;
 use Symfony\Component\Filesystem\Filesystem;
 
-require_once __DIR__ . '/../BaseTestCase.php';
+require_once __DIR__.'/../BaseTestCase.php';
 
 class BranchCommandTest extends BaseTestCase
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -18,7 +17,7 @@ class BranchCommandTest extends BaseTestCase
         $git->init($this->directory);
         $git->setRepository($this->directory);
 
-        $filesystem->dumpFile($this->directory . '/test.txt', '');
+        $filesystem->dumpFile($this->directory.'/test.txt', '');
         $git->add('test.txt');
         $git->commit('Initial commit');
     }
@@ -39,7 +38,7 @@ class BranchCommandTest extends BaseTestCase
     public function testAllBranch()
     {
         $git = new Git();
-        $git->clone('file://' . realpath($this->directory), $this->directory.'2');
+        $git->clone('file://'.realpath($this->directory), $this->directory.'2');
         $git->setRepository($this->directory.'2');
 
         $branches = $git->branch(array('remotes' => true));
@@ -102,5 +101,4 @@ class BranchCommandTest extends BaseTestCase
         $branches = $git->branch();
         $this->assertCount(1, $branches);
     }
-
-} 
+}

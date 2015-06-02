@@ -4,18 +4,17 @@ namespace PHPGit\Command;
 
 use PHPGit\Command;
 use PHPGit\Exception\GitException;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * List, create, or delete branches - `git branch`
+ * List, create, or delete branches - `git branch`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class BranchCommand extends Command
 {
-
     /**
-     * Returns an array of both remote-tracking branches and local branches
+     * Returns an array of both remote-tracking branches and local branches.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -40,13 +39,14 @@ class BranchCommand extends Command
      * @param array $options [optional] An array of options {@see BranchCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return array
      */
     public function __invoke(array $options = array())
     {
-        $options  = $this->resolve($options);
+        $options = $this->resolve($options);
         $branches = array();
-        $builder  = $this->getProcessBuilder()
+        $builder = $this->getProcessBuilder()
             ->add('-v')->add('--abbrev=7');
 
         if ($options['remotes']) {
@@ -67,10 +67,10 @@ class BranchCommand extends Command
             preg_match('/(?<current>\*| ) (?<name>[^\s]+) +((?:->) (?<alias>[^\s]+)|(?<hash>[0-9a-z]{7}) (?<title>.*))/', $line, $matches);
 
             $branch['current'] = ($matches['current'] == '*');
-            $branch['name']    = $matches['name'];
+            $branch['name'] = $matches['name'];
 
             if (isset($matches['hash'])) {
-                $branch['hash']  = $matches['hash'];
+                $branch['hash'] = $matches['hash'];
                 $branch['title'] = $matches['title'];
             } else {
                 $branch['alias'] = $matches['alias'];
@@ -83,7 +83,7 @@ class BranchCommand extends Command
     }
 
     /**
-     * Creates a new branch head named **$branch** which points to the current HEAD, or **$startPoint** if given
+     * Creates a new branch head named **$branch** which points to the current HEAD, or **$startPoint** if given.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -99,11 +99,12 @@ class BranchCommand extends Command
      *
      * @param string $branch     The name of the branch to create
      * @param string $startPoint [optional] The new branch head will point to this commit.
-     *                            It may be given as a branch name, a commit-id, or a tag.
-     *                            If this option is omitted, the current HEAD will be used instead.
+     *                           It may be given as a branch name, a commit-id, or a tag.
+     *                           If this option is omitted, the current HEAD will be used instead.
      * @param array  $options    [optional] An array of options {@see BranchCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function create($branch, $startPoint = null, array $options = array())
@@ -127,7 +128,7 @@ class BranchCommand extends Command
     }
 
     /**
-     * Move/rename a branch and the corresponding reflog
+     * Move/rename a branch and the corresponding reflog.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -144,6 +145,7 @@ class BranchCommand extends Command
      * @param array  $options   [optional] An array of options {@see BranchCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function move($branch, $newBranch, array $options = array())
@@ -164,7 +166,7 @@ class BranchCommand extends Command
     }
 
     /**
-     * Delete a branch
+     * Delete a branch.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -182,6 +184,7 @@ class BranchCommand extends Command
      * @param array  $options [optional] An array of options {@see BranchCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function delete($branch, array $options = array())
@@ -208,11 +211,11 @@ class BranchCommand extends Command
      * - **all**     (_boolean_) List both remote-tracking branches and local branches
      * - **remotes** (_boolean_) List or delete (if used with delete()) the remote-tracking branches
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'force'   => false,
-            'all'     => false,
+            'force' => false,
+            'all' => false,
             'remotes' => false,
         ));
     }
@@ -225,5 +228,4 @@ class BranchCommand extends Command
         return $this->git->getProcessBuilder()
             ->add('branch');
     }
-
-} 
+}

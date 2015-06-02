@@ -2,11 +2,10 @@
 
 use PHPGit\Git;
 
-require_once __DIR__ . '/../BaseTestCase.php';
+require_once __DIR__.'/../BaseTestCase.php';
 
 class ConfigCommandTest extends BaseTestCase
 {
-
     public function testConfigSetAndList()
     {
         $git = new Git();
@@ -23,7 +22,7 @@ class ConfigCommandTest extends BaseTestCase
         $expected = 'John Doe';
 
         if (isset($before['user.name'])) {
-            $expected = $before['user.name'] . "\n" . $expected;
+            $expected = $before['user.name']."\n".$expected;
         }
 
         $this->assertEquals($expected, $config['user.name']);
@@ -46,10 +45,9 @@ class ConfigCommandTest extends BaseTestCase
         $expected = "John Doe\nFoo";
 
         if (isset($before['user.name'])) {
-            $expected = $before['user.name'] . "\n" . $expected;
+            $expected = $before['user.name']."\n".$expected;
         }
 
         $this->assertEquals($expected, $config['user.name']);
     }
-
-} 
+}

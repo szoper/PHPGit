@@ -1,36 +1,39 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "b66b641f994774236370976e3377aab7",
+    "hash": "802ac277f96c0545e458be8388e1534b",
     "packages": [
         {
             "name": "symfony/options-resolver",
-            "version": "v2.4.1",
-            "target-dir": "Symfony/Component/OptionsResolver",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/OptionsResolver.git",
-                "reference": "2b7145803c970e62ac521b2b0984b4bb67209561"
+                "reference": "668673870bf651f0ef62a21160f3f94351523891"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/OptionsResolver/zipball/2b7145803c970e62ac521b2b0984b4bb67209561",
-                "reference": "2b7145803c970e62ac521b2b0984b4bb67209561",
+                "url": "https://api.github.com/repos/symfony/OptionsResolver/zipball/668673870bf651f0ef62a21160f3f94351523891",
+                "reference": "668673870bf651f0ef62a21160f3f94351523891",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7|~3.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\OptionsResolver\\": ""
                 }
             },
@@ -45,44 +48,46 @@
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony OptionsResolver Component",
-            "homepage": "http://symfony.com",
+            "homepage": "https://symfony.com",
             "keywords": [
                 "config",
                 "configuration",
                 "options"
             ],
-            "time": "2013-09-19 09:47:34"
+            "time": "2015-05-13 11:36:16"
         },
         {
             "name": "symfony/process",
-            "version": "v2.4.1",
-            "target-dir": "Symfony/Component/Process",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "58fdccb311e44f28866f976c2d7b3227e9f713db"
+                "reference": "daf96f1491cf0b8d8de60e6d3b5fda8e502b3798"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/58fdccb311e44f28866f976c2d7b3227e9f713db",
-                "reference": "58fdccb311e44f28866f976c2d7b3227e9f713db",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/daf96f1491cf0b8d8de60e6d3b5fda8e502b3798",
+                "reference": "daf96f1491cf0b8d8de60e6d3b5fda8e502b3798",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7|~3.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\Process\\": ""
                 }
             },
@@ -97,41 +102,43 @@
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony Process Component",
-            "homepage": "http://symfony.com",
-            "time": "2014-01-05 02:10:50"
+            "homepage": "https://symfony.com",
+            "time": "2015-05-15 14:11:12"
         }
     ],
     "packages-dev": [
         {
             "name": "symfony/filesystem",
-            "version": "v2.4.1",
-            "target-dir": "Symfony/Component/Filesystem",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "b3c3b5a8108b3e5d604dc23241b4ea84a067fc78"
+                "reference": "45cc231f1ecac70a8790bf1c88a823af8ce57056"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/b3c3b5a8108b3e5d604dc23241b4ea84a067fc78",
-                "reference": "b3c3b5a8108b3e5d604dc23241b4ea84a067fc78",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/45cc231f1ecac70a8790bf1c88a823af8ce57056",
+                "reference": "45cc231f1ecac70a8790bf1c88a823af8ce57056",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7|~3.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\Filesystem\\": ""
                 }
             },
@@ -146,25 +153,25 @@
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony Filesystem Component",
-            "homepage": "http://symfony.com",
-            "time": "2013-12-31 13:43:26"
+            "homepage": "https://symfony.com",
+            "time": "2015-05-15 14:11:12"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "symfony/process": 20,
+        "symfony/options-resolver": 20,
+        "symfony/filesystem": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.2"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

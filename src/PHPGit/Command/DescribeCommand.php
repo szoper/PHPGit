@@ -3,18 +3,17 @@
 namespace PHPGit\Command;
 
 use PHPGit\Command;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Show the most recent tag that is reachable from a commit - `git describe`
+ * Show the most recent tag that is reachable from a commit - `git describe`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class DescribeCommand extends Command
 {
-
     /**
-     * Returns the most recent tag that is reachable from a commit
+     * Returns the most recent tag that is reachable from a commit.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -57,7 +56,7 @@ class DescribeCommand extends Command
     }
 
     /**
-     * Equivalent to $git->describe($committish, ['tags' => true]);
+     * Equivalent to $git->describe($committish, ['tags' => true]);.
      *
      * @param string $committish [optional] Committish object names to describe.
      * @param array  $options    [optional] An array of options {@see DescribeCommand::setDefaultOptions}
@@ -78,13 +77,12 @@ class DescribeCommand extends Command
      * - **tags**   (_boolean_) Enables matching a lightweight (non-annotated) tag
      * - **always** (_boolean_) Show uniquely abbreviated commit object as fallback
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'all'    => false,
-            'tags'   => false,
+            'all' => false,
+            'tags' => false,
             'always' => false,
         ));
     }
-
-} 
+}

@@ -5,15 +5,14 @@ namespace PHPGit\Command;
 use PHPGit\Command;
 
 /**
- * Summarize 'git log' output - `git shortlog`
+ * Summarize 'git log' output - `git shortlog`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class ShortlogCommand extends Command
 {
-
     /**
-     * Summarize 'git log' output
+     * Summarize 'git log' output.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -32,6 +31,7 @@ class ShortlogCommand extends Command
      *     //...
      * ]
      * ```
+     *
      * @param string|array|\Traversable $commits [optional] Defaults to HEAD
      *
      * @return array
@@ -57,7 +57,7 @@ class ShortlogCommand extends Command
         $process->setCommandLine(str_replace('--format=', '--format=%h|%ci|%s', $process->getCommandLine()));
 
         $output = $this->git->run($process);
-        $lines  = $this->split($output);
+        $lines = $this->split($output);
         $result = array();
         $author = null;
 
@@ -70,11 +70,11 @@ class ShortlogCommand extends Command
                 continue;
             }
 
-            list ($commit, $date, $subject) = explode('|', trim($line), 3);
+            list($commit, $date, $subject) = explode('|', trim($line), 3);
             $result[$author][] = array(
-                'commit'  => $commit,
-                'date'    => new \DateTime($date),
-                'subject' => $subject
+                'commit' => $commit,
+                'date' => new \DateTime($date),
+                'subject' => $subject,
             );
         }
 
@@ -82,7 +82,7 @@ class ShortlogCommand extends Command
     }
 
     /**
-     * Suppress commit description and provide a commit count summary only
+     * Suppress commit description and provide a commit count summary only.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -120,15 +120,14 @@ class ShortlogCommand extends Command
         }
 
         $output = $this->git->run($builder->getProcess());
-        $lines  = $this->split($output);
+        $lines = $this->split($output);
         $result = array();
 
         foreach ($lines as $line) {
-            list ($commits, $author) = explode("\t", trim($line), 2);
+            list($commits, $author) = explode("\t", trim($line), 2);
             $result[$author] = (int) $commits;
         }
 
         return $result;
     }
-
-} 
+}

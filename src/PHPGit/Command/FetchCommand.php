@@ -4,18 +4,17 @@ namespace PHPGit\Command;
 
 use PHPGit\Command;
 use PHPGit\Exception\GitException;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Download objects and refs from another repository - `git fetch`
+ * Download objects and refs from another repository - `git fetch`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class FetchCommand extends Command
 {
-
     /**
-     * Fetches named heads or tags from one or more other repositories, along with the objects necessary to complete them
+     * Fetches named heads or tags from one or more other repositories, along with the objects necessary to complete them.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -32,10 +31,11 @@ class FetchCommand extends Command
      *
      * @param string $repository The "remote" repository that is the source of a fetch or pull operation
      * @param string $refspec    The format of a <refspec> parameter is an optional plus +, followed by the source ref <src>,
-     *                            followed by a colon :, followed by the destination ref <dst>
+     *                           followed by a colon :, followed by the destination ref <dst>
      * @param array  $options    [optional] An array of options {@see FetchCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function __invoke($repository, $refspec = null, array $options = array())
@@ -57,7 +57,7 @@ class FetchCommand extends Command
     }
 
     /**
-     * Fetch all remotes
+     * Fetch all remotes.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -76,6 +76,7 @@ class FetchCommand extends Command
      * @param array $options [optional] An array of options {@see FetchCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function all(array $options = array())
@@ -99,14 +100,13 @@ class FetchCommand extends Command
      * - **keep**   (_boolean_) Keep downloaded pack
      * - **prune**  (_boolean_) After fetching, remove any remote-tracking branches which no longer exist on the remote
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'append' => false,
             //'force'  => false,
-            'keep'   => false,
-            'prune'  => false,
+            'keep' => false,
+            'prune' => false,
         ));
     }
-
 }

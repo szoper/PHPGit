@@ -2,11 +2,10 @@
 
 use PHPGit\Git;
 
-require_once __DIR__ . '/../../BaseTestCase.php';
+require_once __DIR__.'/../../BaseTestCase.php';
 
 class SetUrlCommandTest extends BaseTestCase
 {
-
     public function testSetUrl()
     {
         $git = new Git();
@@ -42,5 +41,4 @@ class SetUrlCommandTest extends BaseTestCase
 
         $this->assertEquals('http://example.com/test.git', $remotes['origin']['fetch']);
     }
-
-} 
+}

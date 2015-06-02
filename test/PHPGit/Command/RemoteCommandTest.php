@@ -2,11 +2,10 @@
 
 use PHPGit\Git;
 
-require_once __DIR__ . '/../BaseTestCase.php';
+require_once __DIR__.'/../BaseTestCase.php';
 
 class RemoteCommandTest extends BaseTestCase
 {
-
     public function testRemote()
     {
         $git = new Git();
@@ -18,8 +17,8 @@ class RemoteCommandTest extends BaseTestCase
         $this->assertEquals(array(
             'origin' => array(
                 'fetch' => 'https://github.com/kzykhys/Text.git',
-                'push'  => 'https://github.com/kzykhys/Text.git'
-            )
+                'push' => 'https://github.com/kzykhys/Text.git',
+            ),
         ), $remotes);
     }
 
@@ -35,8 +34,8 @@ class RemoteCommandTest extends BaseTestCase
         $this->assertEquals(array(
             'origin' => array(
                 'fetch' => 'https://github.com/kzykhys/Text.git',
-                'push'  => 'https://github.com/kzykhys/Text.git'
-            )
+                'push' => 'https://github.com/kzykhys/Text.git',
+            ),
         ), $remotes);
     }
 
@@ -52,8 +51,8 @@ class RemoteCommandTest extends BaseTestCase
         $this->assertEquals(array(
             'upstream' => array(
                 'fetch' => 'https://github.com/kzykhys/Text.git',
-                'push'  => 'https://github.com/kzykhys/Text.git'
-            )
+                'push' => 'https://github.com/kzykhys/Text.git',
+            ),
         ), $remotes);
     }
 
@@ -96,5 +95,4 @@ class RemoteCommandTest extends BaseTestCase
         $git = new Git();
         $git->remote->foo();
     }
-
-} 
+}

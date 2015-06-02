@@ -5,15 +5,14 @@ namespace PHPGit\Command;
 use PHPGit\Command;
 
 /**
- * List the contents of a tree object - `git ls-tree`
+ * List the contents of a tree object - `git ls-tree`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class TreeCommand extends Command
 {
-
     /**
-     * Returns the contents of a tree object
+     * Returns the contents of a tree object.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -41,30 +40,29 @@ class TreeCommand extends Command
     {
         $objects = array();
         $builder = $this->git->getProcessBuilder();
-        $process = $builder->add('ls-tree')->add($branch . ':' . $path)->getProcess();
-        $output  = $this->git->run($process);
-        $lines   = $this->split($output);
+        $process = $builder->add('ls-tree')->add($branch.':'.$path)->getProcess();
+        $output = $this->git->run($process);
+        $lines = $this->split($output);
 
         $types = array(
             'submodule' => 0,
-            'tree'      => 1,
-            'blob'      => 2
+            'tree' => 1,
+            'blob' => 2,
         );
 
         foreach ($lines as $line) {
             list($meta, $file) = explode("\t", $line);
-            list($mode, $type, $hash) = explode(" ", $meta);
+            list($mode, $type, $hash) = explode(' ', $meta);
 
             $objects[] = array(
                 'sort' => sprintf('%d:%s', $types[$type], $file),
                 'mode' => $mode,
                 'type' => $type,
                 'hash' => $hash,
-                'file' => $file
+                'file' => $file,
             );
         }
 
         return $objects;
     }
-
-} 
+}

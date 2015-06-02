@@ -3,11 +3,10 @@
 use PHPGit\Git;
 use Symfony\Component\Filesystem\Filesystem;
 
-require_once __DIR__ . '/../BaseTestCase.php';
+require_once __DIR__.'/../BaseTestCase.php';
 
 class CheckoutCommandTest extends BaseTestCase
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -18,7 +17,7 @@ class CheckoutCommandTest extends BaseTestCase
         $git->init($this->directory);
         $git->setRepository($this->directory);
 
-        $filesystem->dumpFile($this->directory . '/test.txt', '');
+        $filesystem->dumpFile($this->directory.'/test.txt', '');
         $git->add('test.txt');
         $git->commit('Initial commit');
     }
@@ -61,5 +60,4 @@ class CheckoutCommandTest extends BaseTestCase
         $status = $git->status();
         $this->assertEquals('gh-pages', $status['branch']);
     }
-
-} 
+}

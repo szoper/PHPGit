@@ -3,11 +3,10 @@
 use PHPGit\Git;
 use Symfony\Component\Filesystem\Filesystem;
 
-require_once __DIR__ . '/../BaseTestCase.php';
+require_once __DIR__.'/../BaseTestCase.php';
 
 class StashCommandTest extends BaseTestCase
 {
-
     public function testStash()
     {
         $filesystem = new Filesystem();
@@ -15,11 +14,11 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash();
 
         $this->assertEquals('hello', file_get_contents($this->directory.'/README.md'));
@@ -32,11 +31,11 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash->save('stash test');
 
         $this->assertEquals('hello', file_get_contents($this->directory.'/README.md'));
@@ -49,11 +48,11 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash();
 
         $stashes = $git->stash->lists();
@@ -70,11 +69,11 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash();
         $git->stash->show('stash@{0}');
     }
@@ -86,15 +85,15 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash();
         $git->stash->drop();
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash();
         $git->stash->drop('stash@{0}');
 
@@ -108,14 +107,14 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash->save('stash#1');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'bar');
+        $filesystem->dumpFile($this->directory.'/README.md', 'bar');
         $git->stash->save('stash#2');
         $git->stash->pop('stash@{1}');
 
@@ -130,14 +129,14 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash->save('stash#1');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'bar');
+        $filesystem->dumpFile($this->directory.'/README.md', 'bar');
         $git->stash->save('stash#2');
         $git->stash->apply('stash@{1}');
 
@@ -152,11 +151,11 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash();
 
         $git->stash->branch('dev', 'stash@{0}');
@@ -173,11 +172,11 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $git->stash();
         $git->stash->clear();
 
@@ -191,14 +190,13 @@ class StashCommandTest extends BaseTestCase
         $git = new Git();
         $git->init($this->directory);
         $git->setRepository($this->directory);
-        $filesystem->dumpFile($this->directory . '/README.md', 'hello');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hello');
         $git->add('.');
         $git->commit('Initial commit');
 
-        $filesystem->dumpFile($this->directory . '/README.md', 'hi!');
+        $filesystem->dumpFile($this->directory.'/README.md', 'hi!');
         $object = $git->stash->create();
 
         $this->assertNotEmpty($object);
     }
-
-} 
+}

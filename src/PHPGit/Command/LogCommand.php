@@ -4,18 +4,17 @@ namespace PHPGit\Command;
 
 use PHPGit\Command;
 use PHPGit\Exception\GitException;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Show commit logs - `git log`
+ * Show commit logs - `git log`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class LogCommand extends Command
 {
-
     /**
-     * Returns the commit logs
+     * Returns the commit logs.
      *
      * ``` php
      * $git = new PHPGit\Git();
@@ -50,6 +49,7 @@ class LogCommand extends Command
      * @param array  $options  [optional] An array of options {@see LogCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return array
      */
     public function __invoke($revRange = '', $path = null, array $options = array())
@@ -60,7 +60,7 @@ class LogCommand extends Command
         $builder = $this->git->getProcessBuilder()
             ->add('log')
             ->add('-n')->add($options['limit'])
-            ->add('--skip=' . $options['skip'])
+            ->add('--skip='.$options['skip'])
             ->add('--format=%H||%aN||%aE||%aD||%s');
 
         if ($revRange) {
@@ -72,16 +72,16 @@ class LogCommand extends Command
         }
 
         $output = $this->git->run($builder->getProcess());
-        $lines  = $this->split($output);
+        $lines = $this->split($output);
 
         foreach ($lines as $line) {
             list($hash, $name, $email, $date, $title) = preg_split('/\|\|/', $line, -1, PREG_SPLIT_NO_EMPTY);
             $commits[] = array(
-                'hash'  => $hash,
-                'name'  => $name,
+                'hash' => $hash,
+                'name' => $name,
                 'email' => $email,
-                'date'  => $date,
-                'title' => $title
+                'date' => $date,
+                'title' => $title,
             );
         }
 
@@ -94,12 +94,11 @@ class LogCommand extends Command
      * - **limit** (_integer_) Limits the number of commits to show
      * - **skip**  (_integer_) Skip number commits before starting to show the commit output
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'limit' => 10,
-            'skip'  => 0
+            'skip' => 0,
         ));
     }
-
-} 
+}

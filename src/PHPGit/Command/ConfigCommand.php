@@ -4,18 +4,17 @@ namespace PHPGit\Command;
 
 use PHPGit\Command;
 use PHPGit\Exception\GitException;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Get and set repository or global options - `git config`
+ * Get and set repository or global options - `git config`.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class ConfigCommand extends Command
 {
-
     /**
-     * Returns all variables set in config file
+     * Returns all variables set in config file.
      *
      *
      * ##### Options
@@ -26,6 +25,7 @@ class ConfigCommand extends Command
      * @param array $options [optional] An array of options {@see ConfigCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return array
      */
     public function __invoke(array $options = array())
@@ -40,13 +40,13 @@ class ConfigCommand extends Command
 
         $config = array();
         $output = $this->git->run($builder->getProcess());
-        $lines  = $this->split($output, true);
+        $lines = $this->split($output, true);
 
         foreach ($lines as $line) {
             list($name, $value) = explode("\n", $line, 2);
 
             if (isset($config[$name])) {
-                $config[$name] .= "\n" . $value;
+                $config[$name] .= "\n".$value;
             } else {
                 $config[$name] = $value;
             }
@@ -56,7 +56,7 @@ class ConfigCommand extends Command
     }
 
     /**
-     * Set an option
+     * Set an option.
      *
      * ##### Options
      *
@@ -68,6 +68,7 @@ class ConfigCommand extends Command
      * @param array  $options [optional] An array of options {@see ConfigCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function set($name, $value, array $options = array())
@@ -86,7 +87,7 @@ class ConfigCommand extends Command
     }
 
     /**
-     * Adds a new line to the option without altering any existing values
+     * Adds a new line to the option without altering any existing values.
      *
      * ##### Options
      *
@@ -98,6 +99,7 @@ class ConfigCommand extends Command
      * @param array  $options [optional] An array of options {@see ConfigCommand::setDefaultOptions}
      *
      * @throws GitException
+     *
      * @return bool
      */
     public function add($name, $value, array $options = array())
@@ -121,12 +123,11 @@ class ConfigCommand extends Command
      * - **global** (_boolean_) Read or write configuration options for the current user
      * - **system** (_boolean_) Read or write configuration options for all users on the current machine
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'global' => false,
             'system' => false,
         ));
     }
-
-} 
+}
