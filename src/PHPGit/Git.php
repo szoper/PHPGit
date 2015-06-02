@@ -119,7 +119,7 @@ class Git
     /** @var Command\DescribeCommand */
     public $describe;
 
-    // Not implemented yet
+    /** @var Command\DiffCommand */
     public $diff;
 
     /** @var Command\FetchCommand */
@@ -193,6 +193,7 @@ class Git
         $this->commit = new Command\CommitCommand($this);
         $this->config = new Command\ConfigCommand($this);
         $this->describe = new Command\DescribeCommand($this);
+        $this->diff = new Command\DiffCommand($this);
         $this->fetch = new Command\FetchCommand($this);
         $this->init = new Command\InitCommand($this);
         $this->log = new Command\LogCommand($this);
