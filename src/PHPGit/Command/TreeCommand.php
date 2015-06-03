@@ -98,7 +98,7 @@ class TreeCommand extends Command
         $builder->add('--diff-filter=ACMRT');
 
         $output = $this->git->run($builder->getProcess());
-        $lines = $this->split($output, true);
+        $lines = $this->split($output);
 
         if ($status) {
             foreach ($lines as $line) {
