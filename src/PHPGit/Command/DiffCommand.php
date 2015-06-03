@@ -48,8 +48,6 @@ class DiffCommand extends Command
             $builder->add('--')->add($path);
         }
 
-        echo $builder->getProcess()->getCommandLine();
-
         $output = $this->git->run($builder->getProcess());
 
         return $output;
