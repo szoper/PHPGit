@@ -100,14 +100,18 @@ class TreeCommand extends Command
         $output = $this->git->run($builder->getProcess());
         $lines = $this->split($output, true);
 
-        foreach ($lines as $line) {
-            list($status, $filename) = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
-            $diff[] = array(
-                'status' => $status,
-                'filename' => $filename,
-            );
+        if ($status) {
+            foreach ($lines as $line) {
+                list($status, $filename) = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
+                $diff[] = array(
+                    'status' => $status,
+                    'filename' => $filename,
+                );
+            }
+
+            return $diff;
         }
 
-        return $diff;
+        return $lines;
     }
 }
