@@ -70,7 +70,7 @@ class TreeCommand extends Command
      * @param string $from
      * @param null $to
      *
-     * @return mixed
+     * @return array
      */
     public function diffNameStatus($from = 'HEAD', $to = null)
     {
