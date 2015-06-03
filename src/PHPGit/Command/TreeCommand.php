@@ -80,6 +80,7 @@ class TreeCommand extends Command
         $builder
             ->add('diff-tree')
             ->add('-r')
+            ->add('--name-status')
             ->add($from);
 
         if (!is_null($to)) {
@@ -89,10 +90,10 @@ class TreeCommand extends Command
         $builder->add('--diff-filter=ACMRT');
 
         $output = $this->git->run($builder->getProcess());
-        $lines = $this->split($output);
+        $lines = $this->split($output, true);
 
         foreach ($lines as $line) {
-            list($status, $filename) = preg_split('/\s\s+/', $line, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+            list($status, $filename) = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
             $diff[] = array(
                 'status' => $status,
                 'filename' => $filename,
