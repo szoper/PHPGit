@@ -69,19 +69,27 @@ class TreeCommand extends Command
     /**
      * @param string $from
      * @param null $to
+     * @param bool $status
      *
      * @return array
+     * @throws \PHPGit\Exception\GitException
      */
-    public function diffNameStatus($from = 'HEAD', $to = null)
+    public function diff($from = 'HEAD', $to = null, $status = false)
     {
         $diff = array();
 
         $builder = $this->git->getProcessBuilder();
         $builder
             ->add('diff-tree')
-            ->add('-r')
-            ->add('--name-status')
-            ->add($from);
+            ->add('-r');
+
+        if ($status) {
+            $builder->add('--name-status');
+        } else {
+            $builder->add('--name-only');
+        }
+
+        $builder->add($from);
 
         if (!is_null($to)) {
             $builder->add($to);
