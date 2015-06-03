@@ -32,7 +32,7 @@ class TreeCommand extends Command
      * ```
      *
      * @param string $branch The commit
-     * @param string $path   The path
+     * @param string $path The path
      *
      * @return array
      */
@@ -40,7 +40,7 @@ class TreeCommand extends Command
     {
         $objects = array();
         $builder = $this->git->getProcessBuilder();
-        $process = $builder->add('ls-tree')->add($branch.':'.$path)->getProcess();
+        $process = $builder->add('ls-tree')->add($branch . ':' . $path)->getProcess();
         $output = $this->git->run($process);
         $lines = $this->split($output);
 
@@ -64,5 +64,41 @@ class TreeCommand extends Command
         }
 
         return $objects;
+    }
+
+    /**
+     * @param string $from
+     * @param null $to
+     *
+     * @return mixed
+     */
+    public function diffNameStatus($from = 'HEAD', $to = null)
+    {
+        $diff = array();
+
+        $builder = $this->git->getProcessBuilder();
+        $builder
+            ->add('diff-tree')
+            ->add('-r')
+            ->add($from);
+
+        if (!is_null($to)) {
+            $builder->add($to);
+        }
+
+        $builder->add('--diff-filter=ACMRT');
+
+        $output = $this->git->run($builder->getProcess());
+        $lines = $this->split($output);
+
+        foreach ($lines as $line) {
+            list($status, $filename) = preg_split('/\s\s+/', $line, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+            $diff[] = array(
+                'status' => $status,
+                'filename' => $filename,
+            );
+        }
+
+        return $diff;
     }
 }
