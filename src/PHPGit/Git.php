@@ -443,13 +443,4 @@ class Git
     {
         return $this->bin;
     }
-
-    public function __destruct()
-    {
-        if ($wrapper = $this->getEnvVar('GIT_SSH', false)) {
-            if (file_exists($wrapper)) {
-                unlink($wrapper);
-            }
-        }
-    }
 }
