@@ -32,7 +32,7 @@ class TreeCommand extends Command
      * ```
      *
      * @param string $branch The commit
-     * @param string $path The path
+     * @param string $path   The path
      *
      * @return array
      */
@@ -40,7 +40,7 @@ class TreeCommand extends Command
     {
         $objects = array();
         $builder = $this->git->getProcessBuilder();
-        $process = $builder->add('ls-tree')->add($branch . ':' . $path)->getProcess();
+        $process = $builder->add('ls-tree')->add($branch.':'.$path)->getProcess();
         $output = $this->git->run($process);
         $lines = $this->split($output);
 
@@ -68,10 +68,11 @@ class TreeCommand extends Command
 
     /**
      * @param string $from
-     * @param null $to
-     * @param bool $status
+     * @param null   $to
+     * @param bool   $status
      *
      * @return array
+     *
      * @throws \PHPGit\Exception\GitException
      */
     public function diff($from = 'HEAD', $to = null, $status = false)

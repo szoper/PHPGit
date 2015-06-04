@@ -174,11 +174,17 @@ class Git
     /** @var Command\TreeCommand */
     public $tree;
 
-    /** @var string  */
+    /** @var string */
     private $bin = 'git';
 
-    /** @var string  */
+    /** @var string */
     private $directory = '.';
+
+    /** @var array */
+    private $env = array();
+
+    /** @var int */
+    private $timeout = 7200;
 
     /**
      * Initializes sub-commands.
@@ -283,8 +289,8 @@ class Git
     public function getProcessBuilder()
     {
         return ProcessBuilder::create()
-            ->setTimeout(7200)
-            ->setPrefix($this->bin)
+            ->setTimeout($this->getTimeout())
+            ->setPrefix($this->getBin())
             ->setWorkingDirectory($this->directory);
     }
 
@@ -299,6 +305,9 @@ class Git
      */
     public function run(Process $process)
     {
+        $env = array_merge($process->getEnv(), $this->getEnvVars());
+        $process->setEnv($env);
+
         $process->run();
 
         if (!$process->isSuccessful()) {
@@ -306,5 +315,149 @@ class Git
         }
 
         return $process->getOutput();
+    }
+
+    /**
+     * Set an alternate private key used to connect to the repository.
+     *
+     * This method sets the GIT_SSH environment variable to use the wrapper
+     * script included with this library. It also sets the custom GIT_SSH_KEY
+     * and GIT_SSH_PORT environment variables that are used by the script.
+     *
+     * @param string      $privateKey
+     *                                Path to the private key.
+     * @param int         $port
+     *                                Port that the SSH server being connected to listens on, defaults to 22.
+     * @param string|null $wrapper
+     *                                Path the the GIT_SSH wrapper script, defaults to null which uses the
+     *                                script included with this library.
+     *
+     * @return Git
+     *
+     * @throws GitException
+     *                      Thrown when any of the paths cannot be resolved.
+     */
+    public function setPrivateKey($privateKey, $port = 22, $wrapper = null)
+    {
+        if (null === $wrapper) {
+            if (\Phar::running()) {
+                $wrapper = __DIR__.'/../../bin/git-ssh-wrapper.sh';
+                $tmp_wrapper = sprintf('%s.sh', tempnam('/tmp', 'wrapper'));
+                file_put_contents($tmp_wrapper, file_get_contents($wrapper));
+                $wrapper = $tmp_wrapper;
+                chmod($wrapper, 0777);
+            } else {
+                $wrapper = __DIR__.'/../../bin/git-ssh-wrapper.sh';
+            }
+        }
+        if (!$wrapperPath = realpath($wrapper)) {
+            throw new GitException('Path to GIT_SSH wrapper script could not be resolved: '.$wrapper);
+        }
+        if (!$privateKeyPath = realpath($privateKey)) {
+            throw new GitException('Path private key could not be resolved: '.$privateKey);
+        }
+
+        return $this
+            ->setEnvVar('GIT_SSH', $wrapperPath)
+            ->setEnvVar('GIT_SSH_KEY', $privateKeyPath)
+            ->setEnvVar('GIT_SSH_PORT', (int) $port);
+    }
+
+    /**
+     * Sets an environment variable that is defined only in the scope of the Git
+     * command.
+     *
+     * @param string $var
+     *                      The name of the environment variable, e.g. "HOME", "GIT_SSH".
+     * @param string $value
+     *
+     * @return Git
+     */
+    public function setEnvVar($var, $value)
+    {
+        $this->env[$var] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Unsets an environment variable that is defined only in the scope of the
+     * Git command.
+     *
+     * @param string $var
+     *                    The name of the environment variable, e.g. "HOME", "GIT_SSH".
+     *
+     * @return Git
+     */
+    public function unsetEnvVar($var)
+    {
+        unset($this->env[$var]);
+
+        return $this;
+    }
+
+    /**
+     * Returns an environment variable that is defined only in the scope of the
+     * Git command.
+     *
+     * @param string $var
+     *                        The name of the environment variable, e.g. "HOME", "GIT_SSH".
+     * @param mixed  $default
+     *                        The value returned if the environment variable is not set, defaults to
+     *                        null.
+     *
+     * @return mixed
+     */
+    public function getEnvVar($var, $default = null)
+    {
+        return isset($this->env[$var]) ? $this->env[$var] : $default;
+    }
+
+    /**
+     * Returns the associative array of environment variables that are defined
+     * only in the scope of the Git command.
+     *
+     * @return array
+     */
+    public function getEnvVars()
+    {
+        return $this->env;
+    }
+
+    /**
+     * @param int $timeout
+     *
+     * @return Git
+     */
+    public function setTimeout($timeout)
+    {
+        $this->timeout = $timeout;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimeout()
+    {
+        return $this->timeout;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBin()
+    {
+        return $this->bin;
+    }
+
+    public function __destruct()
+    {
+        if ($wrapper = $this->getEnvVar('GIT_SSH', false)) {
+            if (file_exists($wrapper)) {
+                unlink($wrapper);
+            }
+        }
     }
 }
