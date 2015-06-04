@@ -283,6 +283,7 @@ class Git
     public function getProcessBuilder()
     {
         return ProcessBuilder::create()
+            ->setTimeout(7200)
             ->setPrefix($this->bin)
             ->setWorkingDirectory($this->directory);
     }
