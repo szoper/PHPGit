@@ -340,15 +340,7 @@ class Git
     public function setPrivateKey($privateKey, $port = 22, $wrapper = null)
     {
         if (null === $wrapper) {
-            if (\Phar::running()) {
-                $wrapper = __DIR__.'/../../bin/git-ssh-wrapper.sh';
-                $tmp_wrapper = sprintf('%s.sh', tempnam('/tmp', 'wrapper'));
-                file_put_contents($tmp_wrapper, file_get_contents($wrapper));
-                $wrapper = $tmp_wrapper;
-                chmod($wrapper, 0777);
-            } else {
-                $wrapper = __DIR__.'/../../bin/git-ssh-wrapper.sh';
-            }
+            $wrapper = __DIR__.'/../../bin/git-ssh-wrapper.sh';
         }
         if (!$wrapperPath = realpath($wrapper)) {
             throw new GitException('Path to GIT_SSH wrapper script could not be resolved: '.$wrapper);
