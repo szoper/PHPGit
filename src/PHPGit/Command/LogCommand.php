@@ -75,6 +75,11 @@ class LogCommand extends Command
             $builder->add('--since='.$options['since']);
         }
 
+        if (!is_null($options['search'])) {
+            $builder->add('--walk-reflogs');
+            $builder->add('--grep-reflog='.$options['search']);
+        }
+
         $output = $this->git->run($builder->getProcess());
         $lines = $this->split($output);
 
@@ -103,6 +108,7 @@ class LogCommand extends Command
         $resolver
             ->setDefault('limit', 10)
             ->setDefault('since', null)
+            ->setDefault('search', null)
             ->setDefault('skip', 0);
     }
 }
