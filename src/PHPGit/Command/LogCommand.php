@@ -58,7 +58,20 @@ class LogCommand extends Command
         $options = $this->resolve($options);
 
         $builder = $this->git->getProcessBuilder()
-            ->add('log')
+            ->add('log');
+
+        if (!is_null($options['since'])) {
+            $builder->add('--since='.$options['since']);
+        }
+
+        if (!is_null($options['search'])) {
+            $builder
+                ->add('--walk-reflogs')
+                ->add('--grep='.$options['search'])
+                ->add('-i');
+        }
+
+        $builder
             ->add('-n')->add($options['limit'])
             ->add('--skip='.$options['skip'])
             ->add('--format=%H||%aN||%aE||%aD||%s');
@@ -69,15 +82,6 @@ class LogCommand extends Command
 
         if ($path) {
             $builder->add('--')->add($path);
-        }
-
-        if (!is_null($options['since'])) {
-            $builder->add('--since='.$options['since']);
-        }
-
-        if (!is_null($options['search'])) {
-            $builder->add('--walk-reflogs');
-            $builder->add('--grep-reflog='.$options['search']);
         }
 
         $output = $this->git->run($builder->getProcess());
