@@ -66,7 +66,6 @@ class LogCommand extends Command
 
         if (!is_null($options['search'])) {
             $builder
-                ->add('--walk-reflogs')
                 ->add('--grep='.$options['search'])
                 ->add('-i');
         }
