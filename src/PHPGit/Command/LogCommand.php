@@ -71,6 +71,10 @@ class LogCommand extends Command
             $builder->add('--')->add($path);
         }
 
+        if (!is_null($options['since'])) {
+            $builder->add('--since='.$options['since']);
+        }
+
         $output = $this->git->run($builder->getProcess());
         $lines = $this->split($output);
 
@@ -98,6 +102,7 @@ class LogCommand extends Command
     {
         $resolver
             ->setDefault('limit', 10)
+            ->setDefault('since', null)
             ->setDefault('skip', 0);
     }
 }
