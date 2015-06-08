@@ -73,7 +73,7 @@ class LogCommand extends Command
         $builder
             ->add('-n')->add($options['limit'])
             ->add('--skip='.$options['skip'])
-            ->add('--format=%H||%aN||%aE||%aD||%s');
+            ->add('--format=%h||%aN||%aE||%aD||%s');
 
         if ($revRange) {
             $builder->add($revRange);
