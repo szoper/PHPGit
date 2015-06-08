@@ -73,6 +73,7 @@ class CloneCommand extends Command
             ->setDefault('shared', false)
             ->setDefault('bare', false)
             ->setDefault('branch', null)
+            ->setDefault('mirror', null)
 
             ->setAllowedTypes('branch', array('null', 'string'));
     }
