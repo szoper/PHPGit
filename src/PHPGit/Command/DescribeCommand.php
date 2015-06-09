@@ -82,6 +82,7 @@ class DescribeCommand extends Command
         $resolver
             ->setDefault('all', false)
             ->setDefault('tags', false)
+            ->setDefault('contains', false)
             ->setDefault('always', false);
     }
 }
