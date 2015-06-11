@@ -101,6 +101,57 @@ class LogCommand extends Command
     }
 
     /**
+     * @param string $revRange
+     * @param null $path
+     * @param bool $status
+     *
+     * @return array
+     *
+     * @throws GitException
+     */
+    public function changed($revRange = '', $path = null, $status = false)
+    {
+        $builder = $this->git->getProcessBuilder()
+            ->add('log');
+
+        if ($status) {
+            $builder->add('--name-status');
+        } else {
+            $builder->add('--name-only');
+        }
+
+        $builder
+            ->add('--format=\'\'');
+
+        if ($revRange) {
+            $builder->add($revRange);
+        }
+
+        if ($path) {
+            $builder->add('--')->add($path);
+        }
+
+        $output = $this->git->run($builder->getProcess());
+        $lines = $this->split($output);
+
+        if ($status) {
+            $commits = array();
+
+            foreach ($lines as $line) {
+                list($status, $filename) = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
+                $diff[] = array(
+                    'status' => $status,
+                    'filename' => $filename,
+                );
+            }
+
+            return $commits;
+        } else {
+            return $lines;
+        }
+    }
+
+    /**
      * {@inheritdoc}
      *
      * - **limit** (_integer_) Limits the number of commits to show
