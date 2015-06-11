@@ -68,14 +68,15 @@ class TreeCommand extends Command
 
     /**
      * @param string $from
-     * @param null   $to
-     * @param bool   $status
+     * @param null $to
+     * @param bool $status
+     * @param string $filter
      *
      * @return array
      *
      * @throws \PHPGit\Exception\GitException
      */
-    public function diff($from = 'HEAD', $to = null, $status = false)
+    public function diff($from = 'HEAD', $to = null, $status = false, $filter = 'ACRMT')
     {
         $diff = array();
 
@@ -96,7 +97,9 @@ class TreeCommand extends Command
             $builder->add($to);
         }
 
-        $builder->add('--diff-filter=ACMRT');
+        if (!empty($filter)) {
+            $builder->add('--diff-filter='.$filter);
+        }
 
         $output = $this->git->run($builder->getProcess());
         $lines = $this->split($output);
