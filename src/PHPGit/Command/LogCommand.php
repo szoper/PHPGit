@@ -121,7 +121,7 @@ class LogCommand extends Command
         }
 
         $builder
-            ->add('--format=\'\'');
+            ->add('--format=');
 
         if ($revRange) {
             $builder->add($revRange);
@@ -139,7 +139,7 @@ class LogCommand extends Command
 
             foreach ($lines as $line) {
                 list($status, $filename) = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
-                $diff[] = array(
+                $commits[] = array(
                     'status' => $status,
                     'filename' => $filename,
                 );
