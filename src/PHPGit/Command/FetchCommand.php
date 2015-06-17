@@ -105,6 +105,7 @@ class FetchCommand extends Command
         $resolver
             ->setDefault('append', false)
             ->setDefault('keep', false)
+            ->setDefault('tags', false)
             ->setDefault('prune', false);
     }
 }
