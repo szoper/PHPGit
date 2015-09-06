@@ -58,6 +58,6 @@ class InitCommand extends Command
     {
         $resolver
             ->setDefault('shared', false)
-            ->setDefault('bare', true);
+            ->setDefault('bare', false);
     }
 }
