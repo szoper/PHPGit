@@ -54,6 +54,12 @@ class LogCommand extends Command
      */
     public function __invoke($revRange = '', $path = null, array $options = array())
     {
+        if (1 === func_num_args()) {
+            $options  = func_get_arg(0);
+            $revRange = null;
+            $path     = null;
+        }
+
         $commits = array();
         $options = $this->resolve($options);
 
