@@ -27,6 +27,17 @@ class LogCommandTest extends BaseTestCase
         $this->assertEquals('test2', $log[0]['title']);
     }
 
+    public function testLogReverse()
+    {
+        $this->addAndCommitFiles(3);
+
+        $log = $this->git->log(null, null, array('reverse' => true));
+        $this->assertEquals(3, count($log));
+        $this->assertEquals('test1', $log[0]['title']);
+        $this->assertEquals('test2', $log[1]['title']);
+        $this->assertEquals('test3', $log[2]['title']);
+    }
+
     /**
      * @param $filesCount
      */

@@ -43,6 +43,8 @@ class LogCommand extends Command
      *
      * - **limit** (_integer_) Limits the number of commits to show
      * - **skip**  (_integer_) Skip number commits before starting to show the commit output
+     * - **merges**  (_boolean_) Print only merge commits.
+     * - **reverse**  (_boolean_) Output the commits in reverse order.
      *
      * @param string $revRange [optional] Show only commits in the specified revision range
      * @param string $path     [optional] Show only commits that are enough to explain how the files that match the specified paths came to be
@@ -87,6 +89,12 @@ class LogCommand extends Command
 
         if ($path) {
             $builder->add('--')->add($path);
+        }
+
+        foreach (array('merges', 'reverse') as $flagOption) {
+            if ($options[$flagOption]) {
+                $builder->add('--' . $flagOption);
+            }
         }
 
         $output = $this->git->run($builder->getProcess());
@@ -162,6 +170,8 @@ class LogCommand extends Command
      *
      * - **limit** (_integer_) Limits the number of commits to show
      * - **skip**  (_integer_) Skip number commits before starting to show the commit output
+     * - **merges**  (_boolean_) Print only merge commits.
+     * - **reverse**  (_boolean_) Output the commits in reverse order.
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {
@@ -169,6 +179,8 @@ class LogCommand extends Command
             ->setDefault('limit', 10)
             ->setDefault('since', null)
             ->setDefault('search', null)
-            ->setDefault('skip', 0);
+            ->setDefault('skip', 0)
+            ->setDefault('merges', false)
+            ->setDefault('reverse', false);
     }
 }
